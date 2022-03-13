@@ -12,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 app.use('/assets', express.static(path.join(__dirname, 'public')));
 
+app.use(express.json());
 
 app.use('/api', apiRoutes);
 

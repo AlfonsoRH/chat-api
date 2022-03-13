@@ -17,8 +17,27 @@ const UsersController = {
             }
         });
     },
-    create: (req, res) => {
-        res.send('create user');
+    signup: (req, res) => {
+        const user = new User();
+        user.signup(req.body).then((result) =>{
+            if(result){
+                res.send(result);
+            }else{
+                res.sendStatus(404);
+            }
+        })
+     
+    },
+    login:(req,res) => {
+        const user = new User();
+        console.log(req.body,"REQ.BODY")
+        user.login(req.body).then(result=>{
+            if(result){
+                res.send(result);
+            }else{
+                res.sendStatus(404);
+            }
+        })
     }
 }
 

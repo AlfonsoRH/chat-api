@@ -1,4 +1,6 @@
 const Channel = require("./channel.model");
+const User = require("../users/user.model");
+
 
 const ChannelsController = {
     getAll: (req, res) => {
@@ -18,8 +20,39 @@ const ChannelsController = {
         });
     },
     create: (req, res) => {
-        res.send('create channel');
+        const channel = new Channel();
+        channel.create(req.body).then(result =>{
+            if(result){
+                res.send(result);
+            }else{
+                res.sendStatus(404);
+            }
+        })
+    },
+
+    link:(req,res )=> {
+        const channel = new Channel();
+        channel.link(req.body).then(result =>{
+            if(result){
+                res.send(result);
+            }
+        }).catch(error=>{
+            res.sendStatus(404);
+        })
+    },
+
+    join:(req,res)=>{
+        const channel = new Channel();
+        channel.join(req.params).then(result =>{
+            if(result){
+                res.send(result);
+            }
+        }).catch(error => {
+            res.sendStatus(404);
+        })
+
     }
+
 }
 
 module.exports = ChannelsController;

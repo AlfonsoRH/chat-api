@@ -1,4 +1,6 @@
 const Message = require("./message.model");
+const User = require("../users/user.model");
+const Channel = require("../channels/channel.model");
 
 const MessagesController = {
     getAll: (req, res) => {
@@ -18,7 +20,15 @@ const MessagesController = {
         });
     },
     create: (req, res) => {
-        res.send('create message');
+        const message = new Message();
+        console.log(req.body);
+        message.create(req.body).then(result =>{
+            if(result){
+                res.send(result);
+            }
+        }).catch(err =>{
+            res.sendStatus(404);
+        })
     }
 }
 
